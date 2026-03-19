@@ -1,0 +1,119 @@
+@import "tailwindcss";
+@plugin '../components/hero.ts';
+/* Note: You may need to change the path to fit your project structure */
+@source '../node_modules/@heroui/theme/dist/**/*.{js,ts,jsx,tsx}';
+@custom-variant dark (&:is(.dark *));
+
+@layer base {
+  :root {
+    --surface: #d7ebda;
+    --surface-muted: #f4f7fb;
+    --surface-subtle: #eef3f9;
+    --surface-strong: #e3ebf5;
+    --border: #d8e2ee;
+    --border-strong: #c2d0df;
+    --text-main: #0f172a;
+    --text-muted: #64748b;
+    --accent: #2563eb;
+    --accent-strong: #1d4ed8;
+    --accent-soft: #e8f0ff;
+    --success: #16a34a;
+    --warning: #d97706;
+    --danger: #dc2626;
+    --shadow-sm: 0 10px 30px rgba(15, 23, 42, 0.06);
+    --shadow-md: 0 18px 50px rgba(15, 23, 42, 0.1);
+  }
+
+  .dark {
+    --surface: #0b1220;
+    --surface-muted: #0a0f1a;
+    --border: #1f2937;
+    --text-main: #e5e7eb;
+    --text-muted: #9ca3af;
+    --accent: #38bdf8;
+    --accent-soft: #0f172a;
+    --success: #34d399;
+  }
+
+  body {
+    @apply bg-(--surface-muted) text-(--text-main) antialiased;
+    background-image:
+      radial-gradient(circle at top, rgba(37, 99, 235, 0.08), transparent 28%),
+      linear-gradient(180deg, #f8fbff 0%, var(--surface-muted) 100%);
+    transition: background-color 150ms ease, color 150ms ease;
+  }
+
+  * {
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+
+  ::selection {
+    background: rgba(37, 99, 235, 0.18);
+  }
+}
+
+@layer components {
+  .surface-card {
+    @apply rounded-2xl border border-[var(--border)] bg-[var(--surface)];
+    box-shadow: var(--shadow-sm);
+  }
+
+  .subtle-chip {
+    @apply rounded-full bg-[var(--accent-soft)] px-3 py-1 text-xs font-semibold text-[var(--accent)];
+  }
+
+  .section-title {
+    @apply text-lg font-semibold text-[var(--text-main)];
+  }
+
+  .muted-text {
+    @apply text-sm text-[var(--text-muted)];
+  }
+
+  .page-shell {
+    @apply min-h-screen bg-[var(--surface)] text-[var(--text-main)];
+  }
+
+  .page-frame {
+    @apply mx-auto flex max-w-[1680px] flex-col lg:flex-row;
+  }
+
+  .page-main {
+    @apply flex-1 px-4 pb-28 pt-4 sm:px-5 lg:px-8 lg:pb-8 lg:pt-8;
+  }
+
+  .metric-card {
+    @apply rounded-2xl border border-[var(--border)] bg-[var(--surface)] p-4 transition-all duration-200;
+    box-shadow: var(--shadow-sm);
+  }
+
+  .metric-card:hover {
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-md);
+  }
+
+  .soft-panel {
+    @apply rounded-2xl border border-[var(--border)] bg-[var(--surface-subtle)];
+  }
+
+  .search-input {
+    @apply rounded-2xl border border-[var(--border)] bg-white transition-all duration-200;
+    box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04);
+  }
+
+  .status-pill {
+    @apply inline-flex items-center gap-2 rounded-full border px-3 py-1 text-xs font-semibold;
+  }
+
+  .status-pill-online {
+    @apply border-emerald-200 bg-emerald-50 text-emerald-700;
+  }
+
+  .status-pill-offline {
+    @apply border-rose-200 bg-rose-50 text-rose-700;
+  }
+
+  .status-pill-idle {
+    @apply border-amber-200 bg-amber-50 text-amber-700;
+  }
+}
